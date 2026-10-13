@@ -18,10 +18,13 @@ const PORT = process.env.PORT
 app.use(helmet());
 app.use(express.json());
 
-app.use(cors({
+app.use(
+  cors({
     origin: process.env.CLIENT_URL,
-    credentials: true,
-}))
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
 
 const authLimiter = rateLimit({
     windowMs:15*60*1000,
